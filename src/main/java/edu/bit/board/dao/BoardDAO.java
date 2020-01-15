@@ -75,4 +75,36 @@ public class BoardDAO {
 		}
 		return dtos;
 	}
+	
+	public int write(String bName, String bTitle, String bContent) {
+		// TODO Auto-generated method stub
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int rn =0;
+		try {
+			connection = dataSource.getConnection();
+			String query = "insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0 )";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, bName);
+			preparedStatement.setString(2, bTitle);
+			preparedStatement.setString(3, bContent);
+			rn = preparedStatement.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		
+		return rn;
+		
+	}
 }

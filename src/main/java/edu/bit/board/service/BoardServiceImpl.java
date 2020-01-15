@@ -28,6 +28,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.getBoardList();
 	}
+
+	@Override
+	public int boardWrite(String bName, String bTitle, String bContent) {
+		// TODO Auto-generated method stub
+		return boardDAO.write(bName, bTitle, bContent);
+	}
 	
 	
 }

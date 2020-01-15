@@ -26,4 +26,20 @@ public class BoardController {
 		return "list";
 	}
 	
+	@RequestMapping("/write_view")
+	public String write_view(Model model) {
+		System.out.println("write_view()");		
+		
+		return "write_view";
+	}
+	
+	@RequestMapping("/write")
+	public String write(BoardVO boardVO) {
+		System.out.println("write()");		
+		
+		int rn = boardService.boardWrite(boardVO.getbName(), boardVO.getbTitle(), boardVO.getbContent());
+		System.out.println("결과 값:" + rn);
+		return "redirect:list";
+	}
+	
 }
